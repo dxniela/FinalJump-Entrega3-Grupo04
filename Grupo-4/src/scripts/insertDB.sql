@@ -1,0 +1,1 @@
+INSERT INTO `trailerflix`.`categorias` (`nombre`) VALUES ('Serie'), ('Pelicula');
