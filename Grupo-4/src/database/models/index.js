@@ -104,7 +104,7 @@ async function initial() {
                                     where: { nombre: actorName },
                                     attributes: ['id', 'nombre']
                                 });
-                                await contenido.addActor(actor);
+                                await contenido.addActores(actor);;
                             }
                         }
                     }

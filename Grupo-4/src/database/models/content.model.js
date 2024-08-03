@@ -43,7 +43,7 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
         }
     );
 
-    Contenido.associate = (models) => {
+    Contenido.associate = function (models) {
         // Asociación muchos a uno con Categorías
         Contenido.belongsTo(models.categorias, {
             foreignKey: 'categoria',
@@ -57,15 +57,13 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
             otherKey: 'tagId',
             as: 'tags'
         });
-
         // Asociación muchos a muchos con Actores
         Contenido.belongsToMany(models.actores, {
             through: 'contenido_actor',
+            as: 'actores',
             foreignKey: 'contenidoId',
-            otherKey: 'actorId',
-            as: 'actores'
+            otherKey: 'actorId'
         });
-
         // Asociación muchos a muchos con Generos
         Contenido.belongsToMany(models.generos, {
             through: 'contenido_genero',
