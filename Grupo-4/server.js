@@ -16,7 +16,9 @@ app.get("/", (req, res) => {
     res.json({ message: "Hi there, welcome to this tutorial." });
 });
 
+// Routers
 require("./src/routers/content.routes")(app);
+require("./src/routers/category.routes")(app);
 
 const PORT = config.PORT;
 app.listen(PORT, () => {
