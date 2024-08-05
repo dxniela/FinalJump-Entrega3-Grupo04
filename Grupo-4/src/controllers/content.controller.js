@@ -1,4 +1,5 @@
 const db = require("../database/models");
+const { mapContenido } = require('../utils/contentUtils');
 const Contenido = db.contenidos;
 const Categoria = db.categorias;
 const Tag = db.tags;
@@ -20,19 +21,8 @@ exports.findAll = (req, res) => {
         ]
     })
         .then(data => {
-            // Transformar los datos si es necesario
-            const result = data.map(contenido => ({
-                id: contenido.id,
-                titulo: contenido.titulo,
-                poster: contenido.poster,
-                categoria: contenido.categoriaDetalle.nombre,
-                tags: contenido.tags.map(t => t.nombre).join(', '),
-                resumen: contenido.resumen,
-                temporadas: contenido.temporadas,
-                reparto: contenido.actores.map(a => a.nombre).join(', '),
-                generos: contenido.generos.map(g => g.nombre).join(', '),
-                trailer: contenido.trailer,
-            }));
+
+            const result = data.map(contenido => mapContenido(contenido, data.nombre));
 
             res.send(result);
         })
