@@ -19,6 +19,7 @@ app.get("/", (req, res) => {
 // Routers
 require("./src/routers/content.routes")(app);
 require("./src/routers/category.routes")(app);
+require("./src/routers/genero.routes")(app);
 
 const PORT = config.PORT;
 app.listen(PORT, () => {
