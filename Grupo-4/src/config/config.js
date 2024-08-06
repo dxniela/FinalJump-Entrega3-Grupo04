@@ -11,6 +11,6 @@ module.exports = {
         DB_PASS: process.env.DB_PASS || '1234',
         DB_NAME: process.env.DB_NAME || 'trailerflix',
         DB_PORT: process.env.DB_PORT || 3306,
-        dialect: "mysql"
+        dialect: process.env.DB_DIALECT || 'mysql'
     }
 }

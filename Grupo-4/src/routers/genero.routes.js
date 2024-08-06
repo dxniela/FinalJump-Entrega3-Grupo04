@@ -3,16 +3,22 @@ module.exports = app => {
 
     const router = require("express").Router();
 
-    router.get("/", generoController.findAll); // obtemer todas los generos
+    // Ruta para obtener todas los generos
+    router.get("/", generoController.findAll); 
 
-    router.get("/serie/:genero", generoController.findGeneroBySeries); // obtener todas las series según el género
+    // Ruta para obtener todas las series de un genero en especifico
+    router.get("/serie/:genero", generoController.findGeneroBySeries); 
 
-    router.get("/pelicula/:genero", generoController.findGeneroByPeliculas); //obtener todas las peliculas por genero
+    // Ruta para obtener todas las peliculas de un genero en especifico
+    router.get("/pelicula/:genero", generoController.findGeneroByPeliculas); 
 
-    router.post("/", generoController.create);
+    // Ruta para crear un genero
+    router.post("/", generoController.create); 
 
-    router.delete("/:id", generoController.destroy);
+    // Ruta para eliminar un genero
+    router.delete("/:id", generoController.destroy); 
 
+    // Ruta para actualizar un genero
     router.put("/:id", generoController.update);
 
     app.use("/api/genero", router);
