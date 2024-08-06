@@ -20,6 +20,8 @@ app.get("/", (req, res) => {
 require("./src/routers/content.routes")(app);
 require("./src/routers/category.routes")(app);
 require("./src/routers/genero.routes")(app);
+require("./src/routers/actores.routes")(app);
+require("./src/routers/tags.routes")(app);
 
 const PORT = config.PORT;
 app.listen(PORT, () => {
