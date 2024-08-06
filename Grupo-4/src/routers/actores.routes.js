@@ -5,7 +5,7 @@ module.exports = app => {
 
     router.get("/", actorController.findAll);
 
-    router.get("/actores/:id", actorController.findOne);
+    router.get("/:id", actorController.findOne);
 
     router.post("/", actorController.create);
 
