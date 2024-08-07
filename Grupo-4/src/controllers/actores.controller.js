@@ -1,48 +1,72 @@
 const db = require("../database/models");
-const Actor = db.actores; 
-
+const Actor = db.actores;
+const Contenido = db.contenidos;
 
 // Recupera todos los actores
 // GET /api/actores
-exports.findAll= (req, res) => {
+exports.findAll = (req, res) => {
     const actor = req.query.actor;
     var condition = actor ? { actor: { [Op.like]: `%${actor}%` } } : null;
 
     Actor.findAll({
-        attributes: ['id','nombre'],
+        attributes: ['id', 'nombre'],
         where: condition
     })
-    .then(data => {
+        .then(data => {
 
-        const result = data.map(actor => ({
-            id: actor.id,
-            nombre: actor.nombre,
-        }));
-        res.send(result);
-    })
-    .catch(err => {
-        res.status(500).send({
-            message: err.message || "Ocurrió un error al recuperar los actores."
+            const result = data.map(actor => ({
+                id: actor.id,
+                nombre: actor.nombre,
+            }));
+            res.send(result);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "Ocurrió un error al recuperar los actores."
+            });
         });
-    });
 };
 
-// Obtener un  Actor con un id determinado
-// GET /actores/:id)
-
+// Obtener un el primer actor con el nombre similar y las obras que trabajo
+// GET api/actores/actores?actor=:nombre)
 exports.findOne = (req, res) => {
-    const id = req.params.id;
-  
-    Actor.findByPk(id)
-      .then(data => {
-        res.send(data);
-      })
-      .catch(err => {
-        res.status(500).send({
-          message: `Error al recuperar el Actor con el id = ${id}`
+    const nombre = req.query.actor;
+
+    if (!nombre) {
+        res.status(400).send({
+            message: "El nombre del actor no puede estar vacío."
         });
-      });
-  };
+        return;
+    }
+
+    Actor.findOne({
+        where: { nombre: { [db.Sequelize.Op.like]: `%${nombre}%` } },
+        include: [
+            {
+                model: Contenido,
+                as: 'contenidos',
+                attributes: ['id', 'titulo', 'poster', 'resumen', 'temporadas', 'trailer', 'categoria'],
+                through: { attributes: [] }  // Excluir atributos de la tabla intermedia
+            }
+        ]
+    })
+        .then(actor => {
+            if (!actor) {
+                res.status(404).send({
+                    message: `No se encontró el actor con el nombre ${nombre}`
+                });
+                return;
+            }
+
+            res.send(actor);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: `Error al recuperar el actor con el nombre ${nombre}`
+            });
+        });
+};
+
 // Crear un nuevo actor
 // POST /api/actor
 exports.create = (req, res) => {
@@ -99,7 +123,6 @@ exports.destroy = (req, res) => {
 
 // Actualizar un actor
 // PUT /api/actor/:id
-
 exports.update = (req, res) => {
     const id = req.params.id;
 
