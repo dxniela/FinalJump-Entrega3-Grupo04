@@ -69,10 +69,22 @@ PORT=3000
     ```
 
 # Endpoints
-aca va la tabla
+|Método| Endpoint |Descripción|
+|------|----------|-----------|
+| GET  |"/api/contenido"|Obtener la información de todas las películas y series|
+| GET  |"/api/contenido/buscar"| Obtener peliculas o series por titulo|
+|DELETE|"/api/contenido/:id"| Eliminar una pelicula o serie especifica|
+| GET  |"/api/actores"|Obtener todos los actores|
+| GET  |"api/actores/actores?actor=:nombre"|Obtener un el primer actor con el nombre similar y las obras que trabajo|
+| GET  |"/api/categoria"|Obtener todas las categorias|
+|PUT|"/api/categoria/:id"|Actualizar una categoría |
+|GET |"/api/generos"| Obtener todos los generos |
+|GET|"/api/generos/pelicula/:genero"| Obtener todas las peliculas de un genero en especifico|
+|GET|"/api/generos/serie/:genero"|Obtener todas las series de un genero en especifico|
+|GET|"/api/tags"| Obtener todos los tags|
+|POST|"/api/tag"| Crear un nuevo tag|
 
-
-## Explicación y ejemplos de uso:
+## Explicación y algunos ejemplos de uso:
 
 ## 1. Obtener la información de todas las películas y series
 
@@ -87,6 +99,59 @@ http://localhost:3000/api/contenido
 ```
 Respuesta: IMAGEN 
 
+
+## 2. Obtener peliculas o series por titulo
+
+- **Método**: `GET`
+- **Ruta**: `/api/contenido/buscar`
+- **Descripción**: Obtiene una pelicula o series segun un titulo dado
+
+**Ejemplo de solicitud**:
+
+```
+http://localhost:3000/api/contenido/el
+```
+Respuesta: IMAGEN 
+
+## 3. Eliminar una pelicula o serie especifica
+
+- **Método**: `DELETE`
+- **Ruta**: `/api/contenido/:id`
+- **Descripción**: Elimina una pelicula o serie especifica segun un id dado
+
+**Ejemplo de solicitud**:
+
+```
+http://localhost:3000/api/contenido/8
+```
+Respuesta: IMAGEN 
+
+## 4. Obtener todos los actores
+
+- **Método**: `GET`
+- **Ruta**: `/api/actores`
+- **Descripción**: Obtener todos los actores
+
+**Ejemplo de solicitud**:
+
+```
+http://localhost:3000/api/actores
+```
+Respuesta: IMAGEN 
+
+## 5. Actualizar una categoría
+
+- **Método**: `PUT`
+- **Ruta**: `/api/categoria/:id`
+- **Descripción**: Actualizar una categoría especifica segun un id dado.
+
+**Ejemplo de solicitud**:
+
+```
+http://localhost:3000/api/categoria/9
+
+```
+Respuesta: IMAGEN 
 
 
 
