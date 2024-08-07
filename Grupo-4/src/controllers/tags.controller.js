@@ -44,7 +44,7 @@ exports.create = (req, res) => {
     };
 
     // Guardar el tag en la base de datos
-    Tag.create(actor)
+    Tag.create(tag)
         .then(data => {
             res.send(data);
         })
