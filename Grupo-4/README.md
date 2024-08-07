@@ -48,7 +48,7 @@ Para realizar el diseño efectivo de la base de datos y sus tablas se utilizó l
 
 <h3 align="center"> Diagrama de entidad-relación resultante: </h3>
 
-![imagen](../src/assets/db-designer/trailerflix.png "der")
+![imagen](https://github.com/dxniela/FinalJump-Entrega3-Grupo04/blob/master/Grupo-4/src/assets/db-designer/trailerflix.png "der")
 
 ## &nbsp;
 
